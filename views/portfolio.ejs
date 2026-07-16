@@ -1,0 +1,189 @@
+<%- include('partials/header') %>
+
+<section class="hero mission-panel">
+  <div class="starmap"></div>
+
+  <h1 class="container-title mission-header">
+    <span class="subsystem-icon"></span>
+    Mission Portfolio
+  </h1>
+
+  <div class="diagnostic-line"></div>
+
+  <p class="container-text mission-statement">
+    Mission‑driven cybersecurity and software engineering professional with 24 years of U.S. Air Force experience securing systems, modernizing mission platforms, and supporting high‑value operations across multi‑facility environments. I build resilient, secure, and scalable solutions that strengthen mission continuity, enhance training systems, and support the next generation of defense‑aligned technology.
+  </p>
+
+  <p class="tagline">
+    Cybersecurity • Full‑Stack Engineering • Space Systems Technology • Active Secret Clearance
+  </p>
+
+  <div class="telemetry-lines"></div>
+  <div class="orbital-path"></div>
+</section>
+
+<div class="mission-divider"></div>
+
+<section class="about mission-panel">
+  <h2 class="container-title mission-header">
+    <span class="subsystem-icon"></span>
+    About Me
+  </h2>
+
+  <div class="diagnostic-line"></div>
+
+  <p class="container-text">
+    I am a U.S. Air Force veteran with 24 years of experience in secure operations, mission support, and technical program management. I am transitioning into cybersecurity and software engineering, combining operational discipline with modern engineering practices to build secure, resilient systems for defense‑aligned missions.
+  </p>
+
+  <p class="container-text">
+    Through a U.S. Department of Labor Software Engineer Apprentorship and a B.S. in Cybersecurity, I focus on secure coding, system troubleshooting, and mission‑critical IT operations that support training, readiness, and modern space and cyber capabilities.
+  </p>
+</section>
+
+<div class="mission-divider"></div>
+
+<section class="resume mission-panel">
+  <h2 class="container-title mission-header">
+    <span class="subsystem-icon"></span>
+    Resume
+  </h2>
+
+  <div class="diagnostic-line"></div>
+
+  <p class="container-text">Select the version that fits your needs:</p>
+
+  <div class="resume-buttons">
+    <a class="btn" href="/resumes/Jonathan_Velazquez_Technical_Resume.pdf" target="_blank">
+      Download Technical Resume (2 pages)
+    </a>
+
+    <a class="btn" href="/resumes/Jonathan_Velazquez_Federal_Resume.pdf" target="_blank">
+      Download Federal Resume (Full Detail)
+    </a>
+  </div>
+</section>
+
+<div class="mission-divider"></div>
+
+<section class="skills mission-panel">
+  <h2 class="container-title mission-header">
+    <span class="subsystem-icon"></span>
+    Cybersecurity Capabilities
+  </h2>
+
+  <div class="diagnostic-line"></div>
+
+  <ul class="container-text">
+    <li>Security+ (in progress)</li>
+    <li>Threat detection & SOC fundamentals</li>
+    <li>Identity & access management</li>
+    <li>Secure coding practices (Node.js, SQL, NoSQL)</li>
+    <li>DevSecOps interest and hands-on experience</li>
+  </ul>
+</section>
+
+<div class="mission-divider"></div>
+
+<section class="skills mission-panel">
+  <h2 class="container-title mission-header">
+    <span class="subsystem-icon"></span>
+    Full‑Stack Engineering
+  </h2>
+
+  <div class="diagnostic-line"></div>
+
+  <ul class="container-text">
+    <li>Node.js, Express, EJS templating</li>
+    <li>SQL (MySQL, Sakila DB) and NoSQL (MongoDB, Redis, Neo4j)</li>
+    <li>REST API development</li>
+    <li>CSS layout engineering and responsive design</li>
+    <li>JavaScript problem solving (Codewars)</li>
+  </ul>
+</section>
+
+<div class="mission-divider"></div>
+
+<section class="projects mission-panel">
+  <h2 class="container-title mission-header">
+    <span class="subsystem-icon"></span>
+    Featured Projects
+  </h2>
+
+  <div class="diagnostic-line"></div>
+
+  <% if (featuredProjects && featuredProjects.length) { %>
+    <div class="featured-grid">
+      <% featuredProjects.forEach(project => { %>
+        <%- include('partials/project-card', { project }) %>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
+<div class="mission-divider"></div>
+
+<section class="projects integrated mission-panel">
+  <h2 class="container-title mission-header">
+    <span class="subsystem-icon"></span>
+    Integrated Mission Features
+  </h2>
+
+  <div class="diagnostic-line"></div>
+
+  <p class="container-text">
+    These systems are embedded directly into the Mission Portfolio to simulate aerospace telemetry and mission‑aligned dashboards.
+  </p>
+
+  <% if (integratedProjects && integratedProjects.length) { %>
+    <div class="integrated-grid">
+      <% integratedProjects.forEach(project => { %>
+        <%- include('partials/project-card-small', { project }) %>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
+<div class="mission-divider"></div>
+
+<section class="projects additional mission-panel">
+  <h2 class="container-title mission-header">
+    <span class="subsystem-icon"></span>
+    Additional Projects
+  </h2>
+
+  <div class="diagnostic-line"></div>
+
+  <p class="container-text">
+    Additional engineering work demonstrating JavaScript fundamentals, UI development, and mission‑aligned problem solving.
+  </p>
+
+  <% if (additionalProjects && additionalProjects.length) { %>
+    <div class="additional-grid">
+      <% additionalProjects.forEach(project => { %>
+        <%- include('partials/project-card', { project }) %>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
+<div class="mission-divider"></div>
+
+<section class="projects mission-panel">
+  <h2 class="container-title mission-header">
+    <span class="subsystem-icon"></span>
+    GitHub Repositories
+  </h2>
+
+  <div class="diagnostic-line"></div>
+
+  <p class="container-text">
+    These repositories represent my ongoing engineering work and mission‑aligned development.
+  </p>
+
+  <div class="github-button-wrapper">
+    <a href="/github-projects" class="btn github-btn">View All GitHub Projects</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,30 @@
+<div class="project-card small">
+  <h3 class="project-title">
+    <%= project.title %>
+  </h3>
+
+  <p class="project-description">
+    <%= project.description %>
+  </p>
+
+  <div class="project-tech">
+    <div class="tech-label">Tech:</div>
+    <% project.tech.forEach(t => { %>
+      <span class="tech-tag"><%= t %></span>
+    <% }) %>
+  </div>
+
+  <div class="project-actions">
+    <% if (project.homepage) { %>
+      <a class="btn project-btn" href="<%= project.homepage %>" target="_blank">
+        Launch Mission
+      </a>
+    <% } %>
+
+    <% if (project.github) { %>
+      <a class="btn github-btn" href="<%= project.github %>" target="_blank">
+        View Repository
+      </a>
+    <% } %>
+  </div>
+</div>
