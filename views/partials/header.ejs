@@ -1,7 +1,4 @@
-<link rel="stylesheet" href="/css/styles.css">
-
 <header class="site-header">
-  <!-- Mission-Aligned Scan Animation Layer -->
   <div class="header-scan"></div>
 
   <div class="brand">
@@ -9,23 +6,11 @@
     <span class="brand-subtitle">Cyber & Space Systems Engineering</span>
   </div>
 
-  <!-- Mobile Hamburger -->
-  <button class="nav-toggle" id="navToggle">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-
   <nav class="nav-links" id="navMenu">
     <a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a>
     <a href="/portfolio" class="<%= page === 'portfolio' ? 'active' : '' %>">Portfolio</a>
     <a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a>
     <a href="/github-projects" class="<%= page === 'github' ? 'active' : '' %>">GitHub Projects</a>
   </nav>
-</header>
 
-<script>
-  document.getElementById('navToggle').addEventListener('click', () => {
-    document.getElementById('navMenu').classList.toggle('open');
-  });
-</script>
+</header>

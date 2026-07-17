@@ -1,140 +1,130 @@
-<%- include('partials/header') %>
+<%- include('partials/head', { title: "Velazquez Mission Systems" }) %>
+  <%- include('partials/header', { page: 'github' }) %>
 
-<div class="github-header mission-panel">
-  <div class="starmap"></div>
+    <div class="github-header mission-panel">
+      <div class="starmap"></div>
 
-  <h1 class="container-title github-title">GitHub Projects</h1>
+      <h1 class="container-title github-title">GitHub Projects</h1>
 
-  <div class="pulsing-line"></div>
+      <div class="pulsing-line"></div>
 
-  <p class="container-text github-subtitle">
-    Live repositories showcasing mission‑ready engineering across cyber, space, and full‑stack development.
-  </p>
+      <p class="container-text github-subtitle">
+        Live repositories showcasing mission‑ready engineering across cyber, space, and full‑stack development.
+      </p>
 
-  <div class="telemetry-lines"></div>
-</div>
-
-<div class="mission-divider"></div>
-
-<section class="github-projects-page">
-
-  <% if (!githubProjects || githubProjects.length === 0) { %>
-    <p class="container-text">No GitHub repositories available at this time.</p>
-  <% } %>
-
-  <% for (let i = 0; i < githubProjects.length; i += 6) { %>
-
-    <% const isLast = (i + 6 >= githubProjects.length); %>
-
-    <div class="github-container mission-panel github-container-<%= i/6 %> <%= isLast ? 'last-github-container' : '' %>">
-
-      <% if (!isLast) { %>
-
-        <!-- NORMAL 6-CARD CONTAINER -->
-        <div class="github-grid">
-          <% githubProjects.slice(i, i + 6).forEach(project => { %>
-            <div class="project-card">
-
-              <h3 class="project-title"><%= project.name %></h3>
-
-              <p class="project-description"><%= project.description %></p>
-
-              <div class="project-tech">
-                <div class="tech-label">Tech:</div>
-
-                <% if (Array.isArray(project.tech)) { %>
-                  <% project.tech.forEach(t => { %>
-                    <span class="tech-tag"><%= t %></span>
-                  <% }) %>
-                <% } else { %>
-                  <span class="tech-tag"><%= project.tech || "Unknown" %></span>
-                <% } %>
-              </div>
-
-              <div class="project-actions">
-                <% if (project.homepage) { %>
-                  <a href="<%= project.homepage %>" target="_blank" class="btn project-btn">Launch Mission</a>
-                <% } %>
-                <a href="<%= project.url %>" target="_blank" class="btn github-btn">View Repository</a>
-              </div>
-
-            </div>
-          <% }) %>
-        </div>
-
-      <% } else { %>
-
-        <!-- LAST CONTAINER (3 ON TOP, 2 ON BOTTOM) -->
-        <div class="github-grid top-row">
-          <% githubProjects.slice(i, i + 3).forEach(project => { %>
-            <div class="project-card">
-
-              <h3 class="project-title"><%= project.name %></h3>
-
-              <p class="project-description"><%= project.description %></p>
-
-              <div class="project-tech">
-                <div class="tech-label">Tech:</div>
-
-                <% if (Array.isArray(project.tech)) { %>
-                  <% project.tech.forEach(t => { %>
-                    <span class="tech-tag"><%= t %></span>
-                  <% }) %>
-                <% } else { %>
-                  <span class="tech-tag"><%= project.tech || "Unknown" %></span>
-                <% } %>
-              </div>
-
-              <div class="project-actions">
-                <% if (project.homepage) { %>
-                  <a href="<%= project.homepage %>" target="_blank" class="btn project-btn">Launch Mission</a>
-                <% } %>
-                <a href="<%= project.url %>" target="_blank" class="btn github-btn">View Repository</a>
-              </div>
-
-            </div>
-          <% }) %>
-        </div>
-
-        <div class="github-grid bottom-row">
-          <% githubProjects.slice(i + 3, i + 6).forEach(project => { %>
-            <div class="project-card">
-
-              <h3 class="project-title"><%= project.name %></h3>
-
-              <p class="project-description"><%= project.description %></p>
-
-              <div class="project-tech">
-                <div class="tech-label">Tech:</div>
-
-                <% if (Array.isArray(project.tech)) { %>
-                  <% project.tech.forEach(t => { %>
-                    <span class="tech-tag"><%= t %></span>
-                  <% }) %>
-                <% } else { %>
-                  <span class="tech-tag"><%= project.tech || "Unknown" %></span>
-                <% } %>
-              </div>
-
-              <div class="project-actions">
-                <% if (project.homepage) { %>
-                  <a href="<%= project.homepage %>" target="_blank" class="btn project-btn">Launch Mission</a>
-                <% } %>
-                <a href="<%= project.url %>" target="_blank" class="btn github-btn">View Repository</a>
-              </div>
-
-            </div>
-          <% }) %>
-        </div>
-
-      <% } %>
-
+      <div class="telemetry-lines"></div>
     </div>
 
     <div class="mission-divider"></div>
 
-  <% } %>
+    <section class="github-projects-page">
 
-</section>
+      <% if (!githubProjects || githubProjects.length===0) { %>
+        <p class="container-text">No GitHub repositories available at this time.</p>
+        <% } %>
 
-<%- include('partials/footer') %>
+          <% for (let i=0; i < githubProjects.length; i +=6) { %>
+
+            <% const isLast=(i + 6>= githubProjects.length); %>
+
+              <div
+                class="github-container mission-panel github-container-<%= i/6 %> <%= isLast ? 'last-github-container' : '' %>">
+
+                <% if (!isLast) { %>
+
+                  <!-- NORMAL 6-CARD CONTAINER -->
+                  <div class="github-grid">
+                    <% githubProjects.slice(i, i + 6).forEach(project=> { %>
+                      <div class="project-card">
+
+                        <h3 class="project-title">
+                          <%= project.name %>
+                        </h3>
+
+                        <p class="project-description">
+                          <%= project.description %>
+                        </p>
+
+                        <div class="project-tech">
+                          <div class="tech-label">Tech:</div>
+
+                          <% if (Array.isArray(project.tech)) { %>
+                            <% project.tech.forEach(t=> { %>
+                              <span class="tech-tag">
+                                <%= t %>
+                              </span>
+                              <% }) %>
+                                <% } else { %>
+                                  <span class="tech-tag">
+                                    <%= project.tech || "Unknown" %>
+                                  </span>
+                                  <% } %>
+                        </div>
+
+                        <div class="project-actions">
+                          <% if (project.homepage) { %>
+                            <a href="<%= project.homepage %>" target="_blank" class="btn project-btn">Launch Mission</a>
+                            <% } %>
+                              <a href="<%= project.url %>" target="_blank" class="btn github-btn">View Repository</a>
+                        </div>
+
+                      </div>
+                      <% }) %>
+                  </div>
+
+                  <% } else { %>
+
+                    <!-- LAST CONTAINER — Dice‑5 Layout -->
+                    <div class="github-grid last-grid">
+
+                      <% githubProjects.slice(i, i + 5).forEach((project, index)=> { %>
+                        <div class="project-card card-<%= index + 1 %>">
+
+                          <h3 class="project-title">
+                            <%= project.name %>
+                          </h3>
+
+                          <p class="project-description">
+                            <%= project.description %>
+                          </p>
+
+                          <div class="project-tech">
+                            <div class="tech-label">Tech:</div>
+
+                            <% if (Array.isArray(project.tech)) { %>
+                              <% project.tech.forEach(t=> { %>
+                                <span class="tech-tag">
+                                  <%= t %>
+                                </span>
+                                <% }) %>
+                                  <% } else { %>
+                                    <span class="tech-tag">
+                                      <%= project.tech || "Unknown" %>
+                                    </span>
+                                    <% } %>
+                          </div>
+
+                          <div class="project-actions">
+                            <% if (project.homepage) { %>
+                              <a href="<%= project.homepage %>" target="_blank" class="btn project-btn">Launch
+                                Mission</a>
+                              <% } %>
+                                <a href="<%= project.url %>" target="_blank" class="btn github-btn">View Repository</a>
+                          </div>
+
+                        </div>
+                        <% }) %>
+
+                    </div>
+
+                    <% } %>
+
+              </div>
+
+              <div class="mission-divider"></div>
+
+              <% } %>
+
+    </section>
+
+    <%- include('partials/footer') %>

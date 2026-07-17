@@ -1,138 +1,131 @@
-<%- include('partials/header') %>
+<%- include('partials/head', { title: "Velazquez Mission Systems" }) %>
+  <%- include('partials/header', { page: 'home' }) %>
 
-<!-- ============================
-     HERO SECTION (Corrected)
+    <!-- ============================
+     HERO SECTION
 ============================ -->
-<section class="home-hero mission-panel">
-  <div class="starmap"></div>
+    <section class="home-hero mission-panel">
+      <div class="starmap"></div>
 
-  <!-- Restore original hero title class -->
-  <h1 class="home-title">
-    Mission‑Ready Engineering
-  </h1>
+      <h1 class="home-title">Mission‑Ready Engineering</h1>
 
-  <!-- Unified paragraph color is OK here -->
-  <p class="container-text home-subtitle">
-    Cybersecurity • Space Systems • Full‑Stack Development
-  </p>
+      <p class="container-text home-subtitle">
+        Cybersecurity • Space Systems • Full‑Stack Development
+      </p>
 
-  <!-- Tagline should NOT use container-support -->
-  <p class="home-tagline">
-    Building secure, resilient, mission‑critical software for modern defense and aerospace operations.
-  </p>
+      <p class="home-tagline">
+        Building secure, resilient, mission‑critical software for modern defense and aerospace operations.
+      </p>
 
-  <a href="/portfolio" class="btn home-btn">Explore Portfolio</a>
+      <a href="/portfolio" class="btn home-btn">Explore Portfolio</a>
 
-  <div class="telemetry-lines"></div>
-  <div class="orbital-path"></div>
-</section>
+      <div class="telemetry-lines"></div>
+      <div class="orbital-path"></div>
+    </section>
 
-<div class="mission-divider"></div>
+    <div class="mission-divider"></div>
 
-<!-- ============================
-     CORE CAPABILITIES (Corrected)
+    <!-- ============================
+     CORE CAPABILITIES
 ============================ -->
-<section class="capabilities-strip mission-panel">
-  <!-- Section title SHOULD use container-title -->
-  <h2 class="container-title mission-header">
-    <span class="subsystem-icon"></span>
-    Core Capabilities
-  </h2>
+    <section class="capabilities-strip mission-panel">
+      <h2 class="container-title mission-header">
+        <span class="subsystem-icon"></span>
+        Core Capabilities
+      </h2>
 
-  <div class="diagnostic-line"></div>
+      <div class="diagnostic-line"></div>
 
-  <div class="capabilities-grid">
-    <div class="capability">
-      <!-- Restore original h3 size -->
-      <h3>Cyber Defense Engineering</h3>
-      <p class="container-text">Threat modeling, secure architectures, and mission‑critical hardening.</p>
-    </div>
+      <div class="capabilities-grid">
+        <div class="capability">
+          <h3>Cyber Defense Engineering</h3>
+          <p class="container-text">Threat modeling, secure architectures, and mission‑critical hardening.</p>
+        </div>
 
-    <div class="capability">
-      <h3>Space Systems Integration</h3>
-      <p class="container-text">Telemetry pipelines, orbital data processing, and resilient comms.</p>
-    </div>
+        <div class="capability">
+          <h3>Space Systems Integration</h3>
+          <p class="container-text">Telemetry pipelines, orbital data processing, and resilient comms.</p>
+        </div>
 
-    <div class="capability">
-      <h3>Mission Software</h3>
-      <p class="container-text">Full‑stack systems for aerospace, defense, and secure operations.</p>
-    </div>
+        <div class="capability">
+          <h3>Mission Software</h3>
+          <p class="container-text">Full‑stack systems for aerospace, defense, and secure operations.</p>
+        </div>
 
-    <div class="capability">
-      <h3>Secure DevOps</h3>
-      <p class="container-text">CI/CD automation, container security, and zero‑trust pipelines.</p>
-    </div>
-  </div>
-</section>
+        <div class="capability">
+          <h3>Secure DevOps</h3>
+          <p class="container-text">CI/CD automation, container security, and zero‑trust pipelines.</p>
+        </div>
+      </div>
+    </section>
 
-<div class="mission-divider"></div>
+    <div class="mission-divider"></div>
 
-<!-- ============================
-     MISSION WORKFLOW (Corrected)
+    <!-- ============================
+     MISSION WORKFLOW
 ============================ -->
-<section class="mission-timeline mission-panel">
-  <h2 class="container-title mission-header">
-    <span class="subsystem-icon"></span>
-    Mission Workflow
-  </h2>
+    <section class="mission-timeline mission-panel">
+      <h2 class="container-title mission-header">
+        <span class="subsystem-icon"></span>
+        Mission Workflow
+      </h2>
 
-  <div class="diagnostic-line"></div>
+      <div class="diagnostic-line"></div>
 
-  <div class="timeline-grid top-row">
-    <div class="timeline-step">
-      <!-- Restore original h3 to fix Phase I alignment -->
-      <h3>Phase I</h3>
-      <p class="container-text">Reconnaissance & Threat Analysis</p>
-    </div>
+      <div class="timeline-grid top-row">
+        <div class="timeline-step">
+          <h3>Phase I</h3>
+          <p class="container-text">Reconnaissance & Threat Analysis</p>
+        </div>
 
-    <div class="timeline-step">
-      <h3>Phase II</h3>
-      <p class="container-text">Secure Architecture Design</p>
-    </div>
+        <div class="timeline-step">
+          <h3>Phase II</h3>
+          <p class="container-text">Secure Architecture Design</p>
+        </div>
 
-    <div class="timeline-step">
-      <h3>Phase III</h3>
-      <p class="container-text">Mission Software Development</p>
-    </div>
-  </div>
+        <div class="timeline-step">
+          <h3>Phase III</h3>
+          <p class="container-text">Mission Software Development</p>
+        </div>
+      </div>
 
-  <div class="timeline-grid bottom-row">
-    <div class="timeline-step">
-      <h3>Phase IV</h3>
-      <p class="container-text">Deployment & Hardening</p>
-    </div>
+      <div class="timeline-grid bottom-row">
+        <div class="timeline-step">
+          <h3>Phase IV</h3>
+          <p class="container-text">Deployment & Hardening</p>
+        </div>
 
-    <div class="timeline-step">
-      <h3>Phase V</h3>
-      <p class="container-text">Continuous Monitoring & Defense</p>
-    </div>
-  </div>
-</section>
+        <div class="timeline-step">
+          <h3>Phase V</h3>
+          <p class="container-text">Continuous Monitoring & Defense</p>
+        </div>
+      </div>
+    </section>
 
-<div class="mission-divider"></div>
+    <div class="mission-divider"></div>
 
-<!-- ============================
-     SYSTEMS ARCHITECTURE (Corrected)
+    <!-- ============================
+     SYSTEMS ARCHITECTURE
 ============================ -->
-<section class="systems-architecture mission-panel">
-  <h2 class="container-title mission-header">
-    <span class="subsystem-icon"></span>
-    Systems Architecture Focus
-  </h2>
+    <section class="systems-architecture mission-panel">
+      <h2 class="container-title mission-header">
+        <span class="subsystem-icon"></span>
+        Systems Architecture Focus
+      </h2>
 
-  <div class="diagnostic-line"></div>
+      <div class="diagnostic-line"></div>
 
-  <p class="container-text architecture-summary">
-    Designing resilient, secure, multi‑domain systems for cyber, space, and defense operations.
-  </p>
+      <p class="container-text architecture-summary">
+        Designing resilient, secure, multi‑domain systems for cyber, space, and defense operations.
+      </p>
 
-  <ul class="container-text architecture-list">
-    <li>Zero‑Trust Mission Networks</li>
-    <li>Secure Telemetry & Orbital Data Pipelines</li>
-    <li>Containerized Mission Services</li>
-    <li>Defense‑Grade CI/CD Automation</li>
-    <li>Multi‑Domain System Integration</li>
-  </ul>
-</section>
+      <ul class="container-text architecture-list">
+        <li>Zero‑Trust Mission Networks</li>
+        <li>Secure Telemetry & Orbital Data Pipelines</li>
+        <li>Containerized Mission Services</li>
+        <li>Defense‑Grade CI/CD Automation</li>
+        <li>Multi‑Domain System Integration</li>
+      </ul>
+    </section>
 
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>
