@@ -1,7 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs');
-const readline = require('readline');
 const { google } = require('googleapis');
 const axios = require('axios');
 const helmet = require('helmet');
@@ -26,20 +24,11 @@ const contactLimiter = rateLimit({
 });
 
 /* ============================================
-   GOOGLE SHEETS CONFIG
-============================================ */
-const TOKEN_PATH = 'token.json';
-const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-
-/* ============================================
    AUTO-GENERATED METADATA ENGINE
 ============================================ */
-
-// Mission-aligned description generator
 function generateDescription(repo) {
   const name = repo.name.toLowerCase();
 
-  // Custom override for your portfolio
   if (repo.name === "Personal-Portfolio") {
     return "Mission‑aligned portfolio showcasing aerospace UI systems, telemetry animations, orbital motion, and a JSON-driven project system.";
   }
@@ -63,12 +52,10 @@ function generateDescription(repo) {
   return repo.description || "Mission-aligned engineering project demonstrating modern development practices.";
 }
 
-// Tech pill generator
 function generateTech(repo) {
   const lang = repo.language ? repo.language.toLowerCase() : "";
   const name = repo.name.toLowerCase();
 
-  // Custom override for your portfolio
   if (repo.name === "Personal-Portfolio") {
     return ["Node.js", "Express", "EJS", "CSS", "JavaScript"];
   }
@@ -96,7 +83,7 @@ function generateTech(repo) {
 }
 
 /* ============================================
-   GITHUB PROJECTS FETCH (AUTO-METADATA VERSION)
+   GITHUB PROJECTS FETCH
 ============================================ */
 async function fetchGitHubRepos() {
   try {
@@ -113,7 +100,6 @@ async function fetchGitHubRepos() {
         name: repo.name,
         url: repo.html_url,
         homepage: repo.homepage || null,
-
         description: generateDescription(repo),
         tech: generateTech(repo)
       }));
@@ -125,7 +111,7 @@ async function fetchGitHubRepos() {
 }
 
 /* ============================================
-   ROUTES — With Active Link Highlighting
+   ROUTES
 ============================================ */
 app.get('/', (req, res) => {
   res.render('index', { page: 'home' });
@@ -135,9 +121,6 @@ app.get('/portfolio', (req, res) => {
   portfolioController.getPortfolio(req, res, 'portfolio');
 });
 
-/* ============================================
-   GITHUB PROJECTS ROUTE (FINAL WORKING VERSION)
-============================================ */
 app.get('/github-projects', async (req, res) => {
   const githubProjects = await fetchGitHubRepos();
   res.render('github-projects', { githubProjects, page: 'github' });
@@ -163,100 +146,74 @@ function validateEmail(email) {
 }
 
 /* ============================================
-   GOOGLE OAUTH HELPERS (DESKTOP APP)
+   GOOGLE OAUTH WEB CLIENT (RENDER-SAFE)
 ============================================ */
-function loadCredentials() {
-  const content = fs.readFileSync('credentials.json');
-  return JSON.parse(content);
-}
-
-function authorize(credentials, callback) {
-  const { client_secret, client_id, redirect_uris } = credentials.installed;
-
-  const oAuth2Client = new google.auth.OAuth2(
-    client_id,
-    client_secret,
-    redirect_uris[0]
+function getOAuthClient() {
+  return new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_REDIRECT_URI
   );
-
-  if (fs.existsSync(TOKEN_PATH)) {
-    const token = fs.readFileSync(TOKEN_PATH);
-    oAuth2Client.setCredentials(JSON.parse(token));
-    callback(oAuth2Client);
-  } else {
-    getNewToken(oAuth2Client, callback);
-  }
 }
 
-function getNewToken(oAuth2Client, callback) {
-  const authUrl = oAuth2Client.generateAuthUrl({
-    access_type: 'offline',
-    scope: SCOPES
+async function getSheetsClient() {
+  const oauth2Client = getOAuthClient();
+
+  oauth2Client.setCredentials({
+    refresh_token: process.env.GOOGLE_REFRESH_TOKEN
   });
 
-  console.log("\n============================================");
-  console.log("Authorize this app by visiting this URL:");
-  console.log(authUrl);
-  console.log("============================================\n");
-
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-
-  rl.question("Enter the code from that page here: ", (code) => {
-    rl.close();
-
-    oAuth2Client.getToken(code, (err, token) => {
-      if (err) {
-        console.error("Error retrieving access token", err);
-        return;
-      }
-
-      oAuth2Client.setCredentials(token);
-      fs.writeFileSync(TOKEN_PATH, JSON.stringify(token));
-      console.log("Token stored to token.json");
-
-      callback(oAuth2Client);
-    });
-  });
+  return oauth2Client;
 }
 
 /* ============================================
-   GOOGLE SHEETS WRITE
+   GOOGLE SHEETS WRITE (WEB AUTH VERSION)
 ============================================ */
-function updateSheet(auth, contact, res) {
-  const sheets = google.sheets({ version: 'v4', auth });
+async function updateSheet(contact, res) {
+  try {
+    const auth = await getSheetsClient();
+    const sheets = google.sheets({ version: "v4", auth });
 
-  const spreadsheetId = '18GjkmKiH3R3GK4XV_W0yDIJF8SNCh46lfxfVoh9N4Ms';
+    const spreadsheetId = "18GjkmKiH3R3GK4XV_W0yDIJF8SNCh46lfxfVoh9N4Ms";
 
-  const values = [
-    [
-      contact.firstName,
-      contact.lastName,
-      contact.email,
-      new Date().toLocaleString()
-    ]
-  ];
+    const values = [
+      [
+        contact.firstName,
+        contact.lastName,
+        contact.email,
+        new Date().toLocaleString()
+      ]
+    ];
 
-  sheets.spreadsheets.values.append(
-    {
+    await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: 'Sheet1!A:D',
-      valueInputOption: 'RAW',
+      range: "Sheet1!A:D",
+      valueInputOption: "RAW",
       resource: { values }
-    },
-    (err) => {
-      if (err) {
-        console.error("Sheets update error:", err);
-        return res.send("Error saving your contact info. Please try again.");
-      }
-      console.log("Sheets append completed — now rendering thanks page");
+    });
 
-      res.render('thanks', { contact, page: 'contact' });
-    }
-  );
+    console.log("Sheets append completed — now rendering thanks page");
+    res.render("thanks", { contact, page: "contact" });
+
+  } catch (err) {
+    console.error("Sheets update error:", err);
+    res.status(500).send("Error saving your contact info.");
+  }
 }
+
+/* ============================================
+   GOOGLE OAUTH LOGIN ROUTE
+============================================ */
+app.get('/auth', (req, res) => {
+  const oauth2Client = getOAuthClient();
+
+  const url = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: ["https://www.googleapis.com/auth/spreadsheets"]
+  });
+
+  res.redirect(url);
+});
 
 /* ============================================
    FULL /thanks ROUTE
@@ -283,17 +240,26 @@ app.post('/thanks', contactLimiter, (req, res) => {
     email: sanitize(email)
   };
 
-  const credentials = loadCredentials();
-  authorize(credentials, (auth) => {
-    updateSheet(auth, safeContact, res);
-  });
+  updateSheet(safeContact, res);
 });
 
 /* ============================================
-   GOOGLE AUTH CALLBACK
+   GOOGLE OAUTH CALLBACK ROUTE
 ============================================ */
-app.get('/sheets-auth', (req, res) => {
-  res.status(200).send("Sheets auth connected to this route");
+app.get('/oauth2callback', async (req, res) => {
+  const code = req.query.code;
+  const oauth2Client = getOAuthClient();
+
+  try {
+    const { tokens } = await oauth2Client.getToken(code);
+
+    console.log("Copy this refresh token into Render:", tokens.refresh_token);
+
+    res.send("OAuth successful! Check Render logs and paste the refresh token into GOOGLE_REFRESH_TOKEN.");
+  } catch (err) {
+    console.error("OAuth callback error:", err);
+    res.status(500).send("OAuth failed.");
+  }
 });
 
 /* ============================================
@@ -302,7 +268,9 @@ app.get('/sheets-auth', (req, res) => {
 module.exports = app;
 
 /* ============================================
-   START SERVER
+   START SERVER (TEST-SAFE)
 ============================================ */
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+if (process.env.NODE_ENV !== 'test') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
