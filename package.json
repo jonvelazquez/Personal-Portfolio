@@ -4,7 +4,7 @@
   "description": "Mission-ready engineering portfolio for cyber, space, and defense operations.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
     "test": "jest"
   },
   "author": "Jonathan M. Velazquez",
