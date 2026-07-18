@@ -130,6 +130,14 @@ app.get('/contact', (req, res) => {
   res.render('contact', { page: 'contact' });
 });
 
+app.get('/privacy', (req, res) => {
+  res.render('privacy', { page: 'privacy' });
+});
+
+app.get('/terms', (req, res) => {
+  res.render('terms', { page: 'terms' });
+});
+
 /* ============================================
    CONTACT FORM VALIDATION + SANITIZATION
 ============================================ */
